@@ -15,10 +15,20 @@ export class CurriculumComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateJobs();
+    this.populateDynamicCache();
   }
 
   private populateJobs(): void {
     this.jobs.push(
+      {
+        id: 0,
+        title: 'Senior Software Engineer',
+        company: 'PicPay',
+        desc: 'Work as senior software engineer and tech leader, responsibilities:\n-Make decisions about architecture, use of APIs and algorithms;\n-Leading development team and review team code;\n-Develop and suggest new features for the system;',
+        site: 'https://www.picpay.com/',
+        begin: '2021-07-01T23:20:46+00:00',
+        end: ''
+      },
       {
         id: 1,
         title: 'Specialist Software Engineer',
@@ -26,7 +36,7 @@ export class CurriculumComponent implements OnInit {
         desc: 'Work as specialist software engineer and tech leader, responsibilities:\n-Make decisions about architecture, use of APIs and algorithms;\n-Leading development team and review team code;\n-Develop and suggest new features for the system;\n-Maintenance of the infrastructure on AWS;\n-Manage the CI and CD tasks on Jenkins/Gitlab CI ',
         site: 'https://www.virtus.ufcg.edu.br',
         begin: '2016-04-01T23:20:46+00:00',
-        end: ''
+        end: '2021-06-30T23:20:46+00:00'
       },
       {
         id: 2,
@@ -92,6 +102,23 @@ export class CurriculumComponent implements OnInit {
         end: '2015-09-01T23:20:46+00:00'
       }
     );
+  }
+
+
+  private populateDynamicCache() {
+    const jobs = this.jobs;
+    const education = this.academicEducation;
+    if('caches' in window) {
+      caches.delete('cv-app-dynamic').then(() => {
+          const  files = ['https://secure.gravatar.com/avatar/586d7f63f6d4c907f10c8c6aec9f1afb?size=400px'];
+          caches.open('cv-app-dynamic').then((cache) => {
+            cache.addAll(files).then(() => {
+              console.log("Cache dinâmico realizado com sucesso!");
+            });
+          });
+      });
+
+    }
   }
 
 }

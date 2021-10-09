@@ -9,6 +9,7 @@ import {FooterComponent} from './footer/footer.component';
 import {NgxPageScrollCoreModule} from 'ngx-page-scroll-core';
 import {NgxPageScrollModule} from 'ngx-page-scroll';
 
+
 @NgModule({
   declarations: [
     AppComponent,
